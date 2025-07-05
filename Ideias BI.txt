@@ -1,0 +1,17 @@
+1 - Quantas medalhas um atleta já ganhou
+2 - Quais países tem mais medalhas
+3 - Qual medalha é mais conquistada por país
+4 - Qual pais ganha mais medalha por sexo(PROPORÇÃO)
+5 - Qual pais dominou um esporte
+6 - Impacto da sede em relação medalhas
+7 - Países que mais evoluíram ou regrediram ao longo do tempo
+
+
+
+
+
+
+
+Brasil
+1 - Qual ano o Brasil levou mais medalhas
+2 - Qual sexo ganhou mais medalhas no Brasil
