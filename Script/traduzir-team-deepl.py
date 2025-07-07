@@ -4,11 +4,7 @@ import time
 import os
 import re
 
-# --- Configuração da API do DeepL ---
-# É ALTAMENTE RECOMENDADO usar uma variável de ambiente para a sua chave API
-# Por exemplo: export DEEPL_API_KEY='SUA_CHAVE_AQUI' no terminal
-# Se preferir colocar diretamente (NÃO RECOMENDADO para produção):
-DEEPL_API_KEY = "37ddaf4d-0816-4616-91e4-593f4d0ef0db:fx" # << SUBSTITUA PELA SUA CHAVE API
+DEEPL_API_KEY = "37ddaf4d-0816-4616-91e4-593f4d0ef0db:fx" # Trocar depois para variável de ambiente
 translator = deepl.Translator(DEEPL_API_KEY)
 
 # --- Funções Auxiliares ---
@@ -26,7 +22,6 @@ def traduzir_com_deepl(texto):
         return texto # Retorna o próprio valor se for NaN ou vazio
 
     try:
-        # Nomes de equipes (países) são geralmente diretos, então um prompt simples funciona bem.
         result = translator.translate_text(
             texto,
             target_lang='pt-BR'
@@ -55,16 +50,13 @@ except FileNotFoundError:
     print("Erro: O arquivo 'athlete_events.csv' não foi encontrado. Por favor, verifique o caminho.")
     exit()
 
-# --- ALTERAÇÃO AQUI: COLUNA 'Team' ---
 coluna = 'Team'
 
 # Carregar o DataFrame traduzido se ele já existir para continuar o trabalho
 try:
-    # O arquivo de progresso para o DeepL será 'traduzido_deepl_team_cache.csv'
     df_traduzido_parcial = pd.read_csv('traduzido_deepl_team_cache.csv')
     print("Arquivo 'traduzido_deepl_team_cache.csv' encontrado. Carregando progresso anterior...")
     
-    # Verifica se as colunas 'Team_Original' e 'Team' existem no cache
     if 'Team_Original' in df_traduzido_parcial.columns and 'Team' in df_traduzido_parcial.columns:
         cache = df_traduzido_parcial.set_index('Team_Original')['Team'].dropna().to_dict()
     else:
